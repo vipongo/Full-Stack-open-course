@@ -8,6 +8,17 @@ const Part = ({item}) => {
     )
   }
 
+const Sum = ({course}) => {
+    console.log(course.parts)
+    let total = 0;
+    course.parts.forEach(element => {
+      total = total+element.exercises
+    });
+    return(
+      <b>Number of exercises {total}</b>
+      )
+  }
+
 const Course = ({course}) => {
     
     return(
@@ -17,6 +28,7 @@ const Course = ({course}) => {
                 {course.parts.map(part=> 
                     <Part  key={part.id} item={part}/>    
                 )}
+                <Sum course={course}/>
             </ul>
         </div>
     )
