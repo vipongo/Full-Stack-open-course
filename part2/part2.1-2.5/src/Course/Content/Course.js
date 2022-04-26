@@ -8,12 +8,10 @@ const Part = ({item}) => {
     )
   }
 
-const Sum = ({course}) => {
-    console.log(course.parts)
-    let total = 0;
-    course.parts.forEach(element => {
-      total = total+element.exercises
-    });
+const Sum = ({parts}) => {
+    const total = 
+        parts.reduce(
+            (previousValue, currentValue) => (previousValue + currentValue.exercises) ,0)
     return(
       <b>Number of exercises {total}</b>
       )
@@ -28,7 +26,7 @@ const Course = ({course}) => {
                 {course.parts.map(part=> 
                     <Part  key={part.id} item={part}/>    
                 )}
-                <Sum course={course}/>
+                <Sum parts={course.parts}/>
             </ul>
         </div>
     )
