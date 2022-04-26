@@ -18,7 +18,6 @@ const Sum = ({parts}) => {
   }
 
 const Course = ({course}) => {
-    
     return(
         <div>
             <h1>{course.name}</h1>
@@ -32,4 +31,13 @@ const Course = ({course}) => {
     )
 }
 
-export default Course
+const Courses = ({courses})=> {
+    return(
+        <div>
+            {courses.map(course=>
+                <Course key={course.id} course={course}/>
+                )}
+        </div>
+    )
+}
+export default Courses
