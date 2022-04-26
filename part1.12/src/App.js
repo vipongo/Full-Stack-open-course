@@ -4,7 +4,28 @@ const generateRandomInteger = (max) => {
   return Math.floor(Math.random() * max);
 }
 
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
 
+const Anecdote = ({selected, points}) => {
+  return(
+    <div>
+      {selected}<br/>
+      {points} people voted for this anecdote
+    </div>
+  )
+}
+
+const increaseVote = (selected, points) => {
+  const copy= [...points]
+  copy[selected]+=1
+  return (
+    copy
+  ) 
+}
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -16,18 +37,14 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
    
-  const [selected, setSelected] = useState(0)
-
-  const Button = (props) => (
-    <button onClick={props.handleClick}>
-      {props.text}
-    </button>
-  )
-
+  const [selected, setSelected] = useState(generateRandomInteger(7))
+  const [points, setPoint] = useState(Array(7).fill(0))
   return (
     <div>
-      {anecdotes[selected]}<br/>
+      <Anecdote selected={anecdotes[selected]} points={points[selected]}/>
+      <Button handleClick={() => setPoint(increaseVote(selected, points))} text="vote" />
       <Button handleClick={() => setSelected(generateRandomInteger(7))} text="Next anecdote" />
+      
     </div>
   )
 }
