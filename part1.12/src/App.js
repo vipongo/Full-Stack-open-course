@@ -26,6 +26,23 @@ const increaseVote = (selected, points) => {
     copy
   ) 
 }
+
+const BestAnecdote = ({anecdotes, points}) => {
+  let bestOption = ''
+  let maximum = -1
+  points.forEach(element => {
+    if(element > maximum){
+      maximum = element
+      bestOption=anecdotes[points.indexOf(element,0)]
+    }
+  });
+  return(
+    <div>
+      {bestOption}
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
@@ -41,10 +58,12 @@ const App = () => {
   const [points, setPoint] = useState(Array(7).fill(0))
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <Anecdote selected={anecdotes[selected]} points={points[selected]}/>
       <Button handleClick={() => setPoint(increaseVote(selected, points))} text="vote" />
       <Button handleClick={() => setSelected(generateRandomInteger(7))} text="Next anecdote" />
-      
+      <h1>Anecdote with the most votes</h1>
+      <BestAnecdote anecdotes={anecdotes} points={points}/>
     </div>
   )
 }
