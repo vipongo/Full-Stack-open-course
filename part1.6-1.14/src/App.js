@@ -3,15 +3,26 @@ import { useState } from 'react'
 const Display = props => <div>{props.name}: {props.value}</div>
 
 const Stats = ({good, neutral, bad}) => {
-  const average= (good-bad)/(good+bad+neutral)
-  const positive= (good/(good+bad+neutral))*100
-  return (
-    <div>
-      Average: {average}<br/>
-      Positive: {positive}%
-      
-    </div>
-  )
+
+  if(good!==0 || neutral!==0 || bad!==0){
+    const average= (good-bad)/(good+bad+neutral)
+    const positive= (good/(good+bad+neutral))*100
+    return (
+      <div>
+        Average: {average}<br/>
+        Positive: {positive}%
+        
+      </div>
+    )
+  }
+  else{
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
+  
 }
 
 const Button = (props) => (
