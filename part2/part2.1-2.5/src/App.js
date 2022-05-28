@@ -1,4 +1,5 @@
 import Courses from "./Course/Content/Course"
+import { useState } from 'react'
 
 const App = () => {
   const courses = [
